@@ -215,7 +215,7 @@ class SeleniumOperationBase:
             self.getScreenShot()
             raise
         except:
-            self.outputException(webElement)
+            self.outputException(buttonInfo)
             raise
 
     # 指定した要素が表示されるまで待機する
