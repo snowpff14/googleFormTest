@@ -210,7 +210,7 @@ class SeleniumOperationBase:
             contents = options[pullDownPosition].find_elements_by_tag_name('content')
             [i.click() for i in contents if i.text == target]
         except SystemError as err:
-            self.log.error('要素待機失敗:'+webElement)
+            self.log.error('要素待機失敗:'+buttonInfo)
             self.log.error('例外発生 {0}'.format(err))
             self.getScreenShot()
             raise
