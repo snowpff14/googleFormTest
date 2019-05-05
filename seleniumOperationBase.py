@@ -203,11 +203,20 @@ class SeleniumOperationBase:
     
     # GoogleFormの場合プルダウンが通常の方法では選択できないので
     def selectPullDownGoogleForm(self,buttonInfo,target,pullDownPosition):
-        self.webElementClickOverlay(buttonInfo)
-        time.sleep(3)
-        options=self.driver.find_elements_by_class_name("exportSelectPopup")
-        contents = options[pullDownPosition].find_elements_by_tag_name('content')
-        [i.click() for i in contents if i.text == target]
+        try:
+            self.webElementClickOverlay(buttonInfo)
+            time.sleep(3)
+            options=self.driver.find_elements_by_class_name("exportSelectPopup")
+            contents = options[pullDownPosition].find_elements_by_tag_name('content')
+            [i.click() for i in contents if i.text == target]
+        except SystemError as err:
+            self.log.error('要素待機失敗:'+webElement)
+            self.log.error('例外発生 {0}'.format(err))
+            self.getScreenShot()
+            raise
+        except:
+            self.outputException(webElement)
+            raise
 
     # 指定した要素が表示されるまで待機する
     def waitWebElementVisibility(self,webElement,waitTime=0):
