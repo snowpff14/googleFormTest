@@ -207,7 +207,7 @@ class SeleniumOperationBase:
             self.webElementClickOverlay(buttonInfo)
             time.sleep(3)
             options=self.driver.find_elements_by_class_name("exportSelectPopup")
-            contents = options[pullDownPosition].find_elements_by_tag_name('content')
+            contents = options[pullDownPosition].find_elements_by_tag_name('div')
             [i.click() for i in contents if i.text == target]
         except SystemError as err:
             self.log.error('要素待機失敗:'+buttonInfo)
